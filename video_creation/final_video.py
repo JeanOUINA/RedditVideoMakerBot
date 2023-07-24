@@ -1,6 +1,7 @@
 import multiprocessing
 import os
 import re
+import json
 from os.path import exists  # Needs to be imported specifically
 from typing import Final
 from typing import Tuple, Any, Dict
@@ -429,3 +430,8 @@ def make_final_video(
     cleanups = cleanup(reddit_id)
     print_substep(f"Removed {cleanups} temporary files 🗑")
     print_step("Done! 🎉 The video is in the results folder 📁")
+    f = open(defaultPath + "/" + filename + ".json", "w")
+    f.write(
+        json.dumps(reddit_obj, indent=4, sort_keys=True)
+    )  # Save the json file for later use
+    f.close()
